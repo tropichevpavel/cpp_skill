@@ -44,8 +44,8 @@ public:
 	Menu(const Menu& menu) = delete;
 	Menu(Menu&& menu) = delete;
 
-	auto begin() const -> std::vector<Option* const>::iterator;
-	auto end() const -> std::vector<Option* const>::iterator;
+	auto begin() -> std::vector<Option*>::iterator;
+	auto end() -> std::vector<Option*>::iterator;
 
 	auto operator[](std::string key) -> Option&;
 

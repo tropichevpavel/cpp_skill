@@ -19,10 +19,10 @@ Menu::Menu(initOptionsPtr options) {
 		this->options.push_back(option);
 }
 
-auto Menu::begin() const -> std::vector<Option* const>::iterator {
+auto Menu::begin() -> std::vector<Option*>::iterator {
 	return options.begin();
 }
-auto Menu::end() const -> std::vector<Option* const>::iterator {
+auto Menu::end() -> std::vector<Option*>::iterator {
 	return options.end();
 }
 
