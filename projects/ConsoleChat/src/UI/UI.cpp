@@ -57,7 +57,7 @@ void UI::back() {
 	pageStack.pop_back();
 }
 
-void UI::clear() const {
+void UI::clear() {
 	std::cout << u8"\e[1;1H\e[2J";
 
 	// #if defined _WIN32

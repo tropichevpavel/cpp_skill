@@ -66,7 +66,7 @@ auto App::getChats(const int& userID) const -> const std::vector<Chat*> {
 	return chats;
 }
 
-auto App::getChat(const int& id) -> Chat* {
+auto App::getChat(const int& id) const -> const Chat* {
 	return chats[id];
 }
 

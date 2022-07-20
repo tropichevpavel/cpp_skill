@@ -20,11 +20,12 @@ public:
 	AnyData(const T& value) : ptr(new Data<T>(value)) {}
 
 	AnyData(const AnyData&) = delete;
-	AnyData(AnyData&& data) : ptr(data.ptr) {
+	AnyData(AnyData&& data) noexcept : ptr(data.ptr) {
 		data.ptr = nullptr;
 	};
 
 	AnyData& operator= (const AnyData&) = delete;
+	AnyData& operator= (AnyData&&) noexcept = delete;
 
 	template <typename T>
 	T& get() {

@@ -41,13 +41,13 @@ struct UI {
 	void drawChatMessagesGeneral(Chat);
 	void drawChatMessagesPM();
 
-	void showByePage();
+	static void showByePage();
 
 	bool quit();
-	void clear() const;
+	static void clear();
 
 	template <typename T>
-	void cin(std::function<void(const T&)> cb) {
+	static void cin(std::function<void(const T&)> cb) {
 		T cin;
 
 		std::cin >> cin;
@@ -58,7 +58,7 @@ struct UI {
 		cb(cin);
 	}
 
-	void cin(std::function<void(const std::string&)> cb) {
+	static void cin(std::function<void(const std::string&)> cb) {
 		std::string cin;
 
 		// std::cin.clear();

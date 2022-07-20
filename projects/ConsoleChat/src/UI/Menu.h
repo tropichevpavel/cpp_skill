@@ -37,7 +37,7 @@ class Menu {
 
 public:
 	Menu() = default;
-	Menu(std::vector<Option*> options);
+	Menu(std::vector<Option*>& options);
 	Menu(initOptions options);
 	Menu(initOptionsPtr options);
 

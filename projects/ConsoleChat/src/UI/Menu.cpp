@@ -7,7 +7,7 @@ Option::Option(Option&& option) : key(option.key), function(option.function) {
 	option.function = nullptr;
 };
 
-Menu::Menu(std::vector<Option*> options) : options(options) {}
+Menu::Menu(std::vector<Option*>& options) : options(options) {}
 
 Menu::Menu(initOptions options) {
 	for (const auto& option : options)

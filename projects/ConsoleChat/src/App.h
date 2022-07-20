@@ -32,7 +32,7 @@ public:
 	auto addChat(const int& userIDto, const std::string& text) -> int;
 	auto getChats() const -> const std::vector<Chat*>&;
 	auto getChats(const int& userID) const -> const std::vector<Chat*>;
-	auto getChat(const int& id) -> Chat*;
+	auto getChat(const int& id) const -> const Chat*;
 
 	void addMessage(const int& id, const int& userIDto, const std::string& text);
 

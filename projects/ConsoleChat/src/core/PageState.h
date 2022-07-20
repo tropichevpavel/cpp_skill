@@ -21,7 +21,7 @@ public:
 		return this->_state.find(name)->second->get<T>();
 	}
 
-	void initState(std::map<std::string, AnyData*> state) {
+	void initState(std::map<std::string, AnyData*>& state) {
 		if (!_state.size()) _state = state;
 	}
 
