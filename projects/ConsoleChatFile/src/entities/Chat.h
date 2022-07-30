@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <fstream>
 
 #include "Message.h"
 
@@ -23,6 +24,8 @@ public:
 	auto getUserID(const int& userID) const -> int;
 
 	auto isPart(const int& userID) const -> bool;
+
+	friend auto operator << (std::ofstream& is, const Chat* user) -> std::ofstream&;
 
 	~Chat();
 };

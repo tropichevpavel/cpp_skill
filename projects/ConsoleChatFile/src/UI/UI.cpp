@@ -6,7 +6,7 @@ UI::UI(App* app) : app(app) {}
 void UI::start() {
 	do drawPage();
 	while (!(isQuit && quit()));
-
+	
 	drawPage(-1);
 }
 

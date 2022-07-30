@@ -1,4 +1,6 @@
 
+#include <iostream>
+
 #include "Chat.h"
 
 Chat::Chat(const int& id, const int& from, const std::string& text) : id(id) {
@@ -44,5 +46,12 @@ auto Chat::isPart(const int& userID) const -> bool {
 }
 
 Chat::~Chat() {
-	for(auto* message : messages) delete message;
+	for (auto* message : messages) delete message;
+}
+
+auto operator << (std::ofstream& is, const Chat* chat) -> std::ofstream& {
+	auto* lastMsg = chat->getLastMessage();
+	for (auto* message : chat->messages)
+		is << chat->id << ' ' << message->getUserIDfrom() << ' ' << message->getUserIDto() << ' ' << message->getText() << (lastMsg == message ? "" : "\n");
+	return is;
 }

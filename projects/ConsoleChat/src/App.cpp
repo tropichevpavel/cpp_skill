@@ -46,7 +46,7 @@ auto App::getUser() const -> const User* {
 	return user;
 }
 
-auto App::getUserName(const int& id) const -> std::string {
+auto App::getUserName(const size_t& id) const -> std::string {
 	if (users.size() >= id)
 		return users[id - 1]->getName();
 	return "";

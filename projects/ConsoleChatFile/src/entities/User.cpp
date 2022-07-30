@@ -18,3 +18,9 @@ auto User::getLogin() const -> const std::string&  {
 auto User::getName() const -> const std::string& {
 	return name;
 }
+
+
+auto operator << (std::ofstream& is, const User* user) -> std::ofstream& {
+	is << user->id << ' ' << user->login << ' ' << user->pass << ' ' << user->name;
+	return is;
+}
