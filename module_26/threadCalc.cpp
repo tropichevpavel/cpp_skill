@@ -29,7 +29,7 @@ int main()
 			if (array->size() > start + count) sum += (*array)[start + count];
 		}
 
-		(*result)[partNum] = sum;
+		result->push_back(sum);
 	};
 
 	std::vector<int> result;
@@ -39,7 +39,6 @@ int main()
 
 	for (int i = 0; i < partCount; ++i)
 	{
-		result.push_back(0);
 		threads.push_back(std::thread(summFunc, &array, i, partSize, &result));
 	}
 
