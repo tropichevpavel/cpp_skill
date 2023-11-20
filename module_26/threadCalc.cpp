@@ -8,40 +8,50 @@
 
 int main()
 {
-	auto startTime = std::chrono::system_clock::now();
-	int arraySize, partSize, arraySum = 0;
-	std::cout << "Input array size and part size (exp 20 60):" << std::endl;
-	std::cin >> arraySize >> partSize;
+	int arraySize, partCount, arraySum = 0;
+	std::cout << "Input array size and thread count (exp 200 10):" << std::endl;
+	std::cin >> arraySize >> partCount;
 
-	int partCount = std::ceil(arraySize / partSize);
+	int partSize = std::ceil(arraySize / partCount);
 
 	std::vector<int> array;
 	int start = 0;
 	int end = 99;
 	for (int i = 0; i < arraySize; ++i) array.push_back(rand() % (end - start + 1) + start);
-	// for (int i = 0; i < arraySize; ++i) std::cout << array[i] << std::endl;
 
-	auto summFunc = [&arraySum](std::vector<int>* array, const int start, int count)
+	auto summFunc = [](const std::vector<int>* array, const int partNum, int count, std::vector<int>* result)
 	{
 		int sum = 0;
+		int start = partNum * count;
 
 		while(count--)
 		{
 			if (array->size() > start + count) sum += (*array)[start + count];
 		}
 
-		arraySum += sum;
+		(*result)[partNum] = sum;
 	};
+
+	std::vector<int> result;
+	std::vector<std::thread> threads;
+
+	auto startTime = std::chrono::system_clock::now();
 
 	for (int i = 0; i < partCount; ++i)
 	{
-		std::thread t(summFunc, &array, i * partSize, partSize);
-		t.join();
+		result.push_back(0);
+		threads.push_back(std::thread(summFunc, &array, i, partSize, &result));
 	}
+
+	for (auto& t : threads) t.join();
+
+	for (int i = 0; i < partCount; ++i) arraySum += result[i];
 
 	auto endTime = std::chrono::system_clock::now();
 	std::cout << "Total sum: " << arraySum << std::endl;
-	std::cout << "Time: " << ((std::chrono::duration<double>)(endTime - startTime)).count() << std::endl;
+	std::cout << "Time sum: " << ((std::chrono::duration<double>)(endTime - startTime)).count() << std::endl;
+
+	std::cout << "Check summ: " << ([&result](){ int sum = 0; for (auto& val : result) sum += val; return sum; })() << std::endl;
 
 	return 0;
 }
