@@ -39,9 +39,11 @@ void UI::showChatsPage()
 					int in = 0;
 					try { in = std::stoi(input); } catch (...) { return; }
 
-					if (app->getChat(in))
+					auto chat = app->getChat(in);
+
+					if (chat)
 					{
-						pushPage(5, {{ "chatID", in }});
+						pushPage(5, {{ "chatID", chat->getID() }});
 						return;
 					}
 				}

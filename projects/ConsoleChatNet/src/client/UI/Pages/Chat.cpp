@@ -81,7 +81,7 @@ void UI::showChatPage()
 
 	auto user = app->getUser();
 	auto userID = user->getID();
-	auto chat = app->getChat(ps.get<int>("chatID"));
+	auto chat = app->getChatByID(ps.get<int>("chatID"));
 
 	const int& chatID = chat->getID();
 
