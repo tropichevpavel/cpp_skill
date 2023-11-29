@@ -107,9 +107,8 @@ void merge_sort_thread(int* array, const int& left, const int& right)
 
 	if (future_left.valid() && future_right.valid())
 	{
-		lock_add_thread.lock();
+		std::lock_guard<std::mutex> tmp_lock(lock_add_thread);
 		--thread_count_cur;
-		lock_add_thread.unlock();
 	}
 
 	if (future_left.valid()) future_left.wait();
@@ -119,16 +118,15 @@ void merge_sort_thread(int* array, const int& left, const int& right)
 
 	if (future_left.valid() || future_right.valid())
 	{
-		lock_add_thread.lock();
+		std::lock_guard<std::mutex> tmp_lock(lock_add_thread);
 		--thread_count_cur;
-		lock_add_thread.unlock();
 	}
 }
 
 int main(int argc, char* argv[])
 {
 	srand(0);
-	long arr_size = 50000000;
+	size_t arr_size = 50000000;
 
 	if (argc > 1)
 	{
