@@ -72,10 +72,11 @@ auto Logger::read_line(const int& line_num) -> std::string
 
 	std::string last_line;
 
-	lock_os.lock_shared();
-
 	bool find = false;
 	size_t counter = 0;
+
+	std::shared_lock<std::shared_mutex>(lock_os);
+
 	if (line_num == -1)
 	{
 		counter = 2;
@@ -112,7 +113,6 @@ auto Logger::read_line(const int& line_num) -> std::string
 
 	std::getline(os_log_file, last_line);
 	os_log_file.seekg(-1, std::ios_base::end);
-	lock_os.unlock_shared();
 
 	return last_line;
 }
