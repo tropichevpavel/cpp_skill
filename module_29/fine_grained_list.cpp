@@ -27,21 +27,28 @@ public:
 
 	void insert(const int& data, const int& pos = -1)
 	{
+		size_t counter = pos == -1 ? 1 : pos == 0 ? 0 : pos - 1;
 		Node* cur;
 		{
 			{
 				std::lock_guard<std::shared_mutex> tmp_lock(queue_mutex);
 				if (!head)
-				{				
+				{
 					head = new Node(data);
 					return;
 				}
 				head->node_mutex.lock_shared();
+				if (counter == 0)
+				{
+					cur = head;
+					head = new Node(data);
+					head->next = cur;
+					cur->node_mutex.unlock_shared();
+					return;
+				}
 			}
 
 			cur = head;
-
-			size_t counter = pos == -1 ? 0 : pos - 1;
 
 			while (cur->next && (pos == -1 || --counter))
 			{
@@ -165,6 +172,8 @@ int main()
 			std::cout << "Print from t3:" << std::endl;
 			fgq.print();
 		}
+
+		fgq.insert(r + 11, 1);
 	});
 
 	t1.wait();
