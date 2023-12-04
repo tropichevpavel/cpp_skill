@@ -3,6 +3,7 @@
 #include <future>
 #include <condition_variable>
 #include <vector>
+#include <atomic>
 
 template<class T>
 class BlockedQueue
@@ -146,12 +147,9 @@ void quicksort(int* array, const size_t& left, const size_t& right, std::promise
 		while (array[left_bound] < middle) ++left_bound;
 		while (array[right_bound] > middle) --right_bound;
 
-		//Меняем элементы местами
 		if (left_bound <= right_bound)
 		{
-			std::swap(array[left_bound], array[right_bound]);
-			left_bound++;
-			right_bound--;
+			std::swap(array[left_bound++], array[right_bound--]);
 		}
 	}
 	while (left_bound <= right_bound);
