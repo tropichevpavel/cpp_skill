@@ -16,7 +16,7 @@ void quicksort(int* array, long left, long right)
 	do
 	{
 		while (array[left_bound] < middle) left_bound++;
-		while(array[right_bound] > middle) right_bound--;
+		while (array[right_bound] > middle) right_bound--;
 
 		//Меняем элементы местами
 		if (left_bound <= right_bound)
@@ -51,6 +51,12 @@ int main()
 
 	for (long i = 0; i < arr_size; ++i) array[i] = rand() % 500000;
 
+	for (size_t i = 0; i < arr_size - 1; ++i)
+	{
+		std::cout << " " << array[i];
+	}
+	std::cout << std::endl;
+
 	time_t start, end;
 
 	// многопоточный запуск
@@ -60,6 +66,12 @@ int main()
 
 	double seconds = difftime(end, start);
 	printf("The time: %f seconds\n", seconds);
+
+	for (size_t i = 0; i < arr_size - 1; ++i)
+	{
+		std::cout << " " << array[i];
+	}
+	std::cout << std::endl;
 
 	for (long i = 0; i < arr_size - 1; ++i)
 	{
